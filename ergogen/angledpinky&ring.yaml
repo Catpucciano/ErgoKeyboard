@@ -4,13 +4,16 @@ points:
       columns:
         outer:
           rows.num.skip: true # Removed Escape Key in Tradition Layout 
+          rows.top.skip: true
           key:
-            shift:
+            splay: 8 
         pinky:
           key:
+            splay: -4
             spread: cx +2  # Extra Spacing, looks like keys overlap in layout, double check later
         ring:
           key:
+            splay: -4
             stagger: 8
             spread: cx +2  # Extra Spacing, looks like keys overlap in layout, double check later
         middle:
@@ -77,4 +80,25 @@ outlines:
     - name: board
     - operation: subtract
       name: keys
-
+pcbs:
+    left:
+      outlines:
+          main: 
+            outline: board
+      footprints:
+        choc_hotswap:
+          what: choc_hotswap
+          where:
+            params:
+              keycaps: true
+              reverse: false
+              hotswap: true
+              from: "{{column_net}}"
+              to: "{{column_row}}"
+            seeed_xiao:
+              what: xiao-ble
+            battery_switch:
+              what: slider
+            reset:
+                what: EVQPUC
+                params:

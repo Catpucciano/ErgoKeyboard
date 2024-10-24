@@ -1,3 +1,4 @@
+
 units:
   px: cx + 2 # 20mm
   py: cy + 2 # 19mm
@@ -140,7 +141,7 @@ pcbs:
           shift: [0, -5]
       # Controller
       seeed_xiao: 
-        what: promicro # switch to xiao when finish with footprint
+        what: xiao-ble # switch to xiao when finish with footprint
         params:
         where: 
           ref: main_outer_top
