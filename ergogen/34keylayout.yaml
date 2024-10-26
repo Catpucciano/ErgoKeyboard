@@ -1,0 +1,206 @@
+units:
+  px: cx + 2 # 20mm
+  py: cy + 2 # 19mm
+  
+  pushX: (cx / 2) # 10mm
+  pushY: (cy / 2) # 9.5
+
+  padX: pushX + 2 # 12mm
+  padY: pushY + 2 # 11.5mm
+
+  pad: 2
+
+points:
+  zones:  # Area that can be defined 
+    main: # Defining Functional portions of the keyboard, letters & numbers
+      anchor: # Move to fit inside kiCAD sheet
+        shift: [100,-150]
+      columns:
+        pinky:
+          rows.top.skip: true
+          key:
+            spread: cx
+        ring:
+          key:
+            stagger: 8
+            spread: cx
+        middle:
+          key:
+            stagger: 2
+            spread: cx 
+        index:
+          key:
+            stagger: -2
+            spread: cx 
+        inner:
+          key:
+            stagger: -2
+            spread: cx 
+      rows:
+        bottom:
+          row_net: P7
+        middle:
+          row_net: P8
+        top:
+          row_net: P9
+    thumb: # Created Thumb Cluster as own zone with two keys
+      anchor:
+        ref: main_middle_bottom
+        shift: [9,-24]
+      rows:
+        clusters:
+          row_net: P6
+      columns:
+        inner:
+        middle:
+          key:
+            spread: cx
+        outer:
+          key:
+            spread: cx 
+  mirror: &mirror 
+      ref: main_inner_top
+      distance: 5cx
+    
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [px,py]
+  keys:
+    - what: rectangle
+      where: true
+      size: [cx-0.5,cy-0.5]
+  board_left:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        - ref: thumb_outer_clusters
+          shift: [-padX+5 + px,-pushX-pad]
+        - ref: main_pinky_bottom
+          shift: [pushX,-py-pad*2-2]  
+        - ref: main_pinky_bottom
+          shift: [-pushX-pad*2,-py+pushY]   
+        - ref: main_ring_top
+          shift: [(-padX*3)+2,px/2+4]  
+        - ref: main_ring_top 
+          shift: [0,px/2+4]  
+        - ref: main_middle_top
+          shift: [0,px/2+2]  
+        - ref: main_inner_top
+          shift: [padX*2+1,px-4]
+  board_right:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: mirror_main_inner_top
+          shift: [padX -pad + px ,0]
+        - ref: mirror_thumb_outer_clusters
+          shift: [-pushX + px,-pushX-pad]
+        - ref: mirror_main_pinky_bottom
+          shift: [pushX,-py-pad*2]  
+        - ref: mirror_main_pinky_bottom
+          shift: [-pushX-pad*2,-py+pushY]   
+        - ref: mirror_main_ring_top
+          shift: [-padX-pad-1,px +py-pad+3]  
+        - ref: mirror_main_ring_top
+          shift: [0,px]  
+        - ref: mirror_main_middle_top
+          shift: [0,px/2+1]  
+        - ref: mirror_main_inner_top
+          shift: [padX,px-5]
+      fillet: 2
+  cutout_left: 
+    - name: board_left
+    - operation: subtract
+      name: keys
+pcbs:
+  left:
+    outlines:
+      main:
+        outline: board_left
+    footprints:
+      choc_hotswap:
+        what: choc 
+        where: /^(?!mirror_thumb)(main_|thumb_).*/
+        params: 
+          keycaps: true
+          reverse: false 
+          hotswap: true 
+          from: "{{column_net}}"
+          to: "{{column_row}}" 
+      diode:
+        what: diode
+        where: /^(?!mirror_thumb)(main_|thumb_).*/
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      seeed_xiao:
+        what: xiao-ble
+        params:
+        where:
+          ref: main_ring_top
+          shift: [-20, -2]
+          rotate: 90
+      battery_switch:
+        what: slider
+        where:
+          ref: main_ring_top 
+          shift: [0,11.7]
+        params:
+          from: POS
+          to: RST
+      reset:
+        what: EVQPUC
+        params:
+          from: GND
+          to: RST 
+        where: 
+          ref: main_index_top
+          shift: [0,11.7]
+      battery_pad:
+        what: battery_pad
+        where: 
+          ref: main_middle_bottom
+          shift: [0,-10.5]
+        params:
+          plus: POS
+          minus: GND
+      #mounting Holes
+      hole_bottom_left: 
+        what: mountinghole
+        where: 
+          ref: main_pinky_bottom
+          shift: [0,-14]
+      thumb_left: 
+        what: mountinghole
+        where: 
+          ref: thumb_inner_clusters
+          shift: [-13,-7]
+      hole_top_right: 
+        what: mountinghole
+        where: 
+          ref: main_inner_top
+          shift: [2,12]
+      hole_bottom_right: 
+        what: mountinghole
+        where: 
+          ref: main_inner_bottom
+          shift: [20,-5]
+      cattpucciano: 
+        what: text 
+        where: 
+          ref: main_inner_bottom
+          shift: [15.5,6.5]
+          rotate: 90 
+        params: 
+          text: Catpucciano
+          justify: left
+          h_size: 3.0
+          v_size: 3.0
+          thickness: .4
+
+        
