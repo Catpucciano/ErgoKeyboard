@@ -20,44 +20,53 @@ points:
           rows.top.skip: true
           key:
             spread: cx
+            column_net: P0
         ring:
           key:
             stagger: 8
             spread: cx
+            column_net: P1
+
         middle:
           key:
             stagger: 2
             spread: cx 
+            column_net: P2
         index:
           key:
             stagger: -2
             spread: cx 
+            column_net: P3
         inner:
           key:
             stagger: -2
             spread: cx 
+            column_net: P4
       rows:
         bottom:
-          row_net: P7
-        middle:
           row_net: P8
-        top:
+        middle:
           row_net: P9
+        top:
+          row_net: P10
     thumb: # Created Thumb Cluster as own zone with two keys
       anchor:
         ref: main_middle_bottom
         shift: [9,-24]
       rows:
         clusters:
-          row_net: P6
+          row_net: P7
       columns:
-        inner:
         middle:
+          key.column_net: P2
+        index:
           key:
             spread: cx
-        outer:
+            column_net: P3
+        inner:
           key:
             spread: cx 
+            column_net: P4
   mirror: &mirror 
       ref: main_inner_top
       distance: 5cx
@@ -76,7 +85,7 @@ outlines:
       operation: stack
       fillet: 2
       points:
-        - ref: thumb_outer_clusters
+        - ref: thumb_inner_clusters
           shift: [-padX+5 + px,-pushX-pad]
         - ref: main_pinky_bottom
           shift: [pushX,-py-pad*2-2]  
@@ -94,22 +103,20 @@ outlines:
     - what: polygon
       operation: stack
       points:
-        - ref: mirror_main_inner_top
-          shift: [padX -pad + px ,0]
-        - ref: mirror_thumb_outer_clusters
-          shift: [-pushX + px,-pushX-pad]
+        - ref: mirror_thumb_inner_clusters
+          shift: [-padX+5 + px,-pushX-pad]
         - ref: mirror_main_pinky_bottom
-          shift: [pushX,-py-pad*2]  
+          shift: [pushX,-py-pad*2-2]  
         - ref: mirror_main_pinky_bottom
           shift: [-pushX-pad*2,-py+pushY]   
         - ref: mirror_main_ring_top
-          shift: [-padX-pad-1,px +py-pad+3]  
-        - ref: mirror_main_ring_top
-          shift: [0,px]  
+          shift: [(-padX*3)+2,px/2+4]  
+        - ref: mirror_main_ring_top 
+          shift: [0,px/2+4]  
         - ref: mirror_main_middle_top
-          shift: [0,px/2+1]  
+          shift: [0,px/2+2]  
         - ref: mirror_main_inner_top
-          shift: [padX,px-5]
+          shift: [padX*2+1,px-4] 
       fillet: 2
   cutout_left: 
     - name: board_left
@@ -129,7 +136,7 @@ pcbs:
           reverse: false 
           hotswap: true 
           from: "{{column_net}}"
-          to: "{{column_row}}" 
+          to: "{{colrow}}" 
       diode:
         what: diode
         where: /^(?!mirror_thumb)(main_|thumb_).*/
@@ -151,8 +158,8 @@ pcbs:
           ref: main_ring_top 
           shift: [0,11.7]
         params:
-          from: POS
-          to: RST
+          from: BAT+
+          to: POS
       reset:
         what: EVQPUC
         params:
@@ -178,7 +185,7 @@ pcbs:
       thumb_left: 
         what: mountinghole
         where: 
-          ref: thumb_inner_clusters
+          ref: thumb_middle_clusters
           shift: [-13,-7]
       hole_top_right: 
         what: mountinghole
@@ -202,5 +209,90 @@ pcbs:
           h_size: 3.0
           v_size: 3.0
           thickness: .4
-
+  right:
+    outlines:
+      main:
+        outline: board_right
+    footprints:
+      choc_hotswap:
+        what: choc 
+        where: /^(mirror_).*/
+        params: 
+          keycaps: true
+          reverse: false 
+          hotswap: true 
+          from: "{{column_net}}"
+          to: "{{colrow}}" 
+      diode:
+        what: diode
+        where: /^(mirror_).*/
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      seeed_xiao:
+        what: xiao-ble
+        params:
+        where:
+          ref: mirror_main_ring_top
+          shift: [-20, -2]
+          rotate: 90
+      battery_switch:
+        what: slider
+        where:
+          ref: mirror_main_ring_top 
+          shift: [0,11.7]
+        params:
+          from: BAT+
+          to: POS
+      reset:
+        what: EVQPUC
+        params:
+          from: GND
+          to: RST 
+        where: 
+          ref: mirror_main_index_top
+          shift: [0,11.7]
+      battery_pad:
+        what: battery_pad
+        where: 
+          ref: mirror_main_middle_bottom
+          shift: [0,-10.5]
+        params:
+          plus: POS
+          minus: GND
+      #mounting Holes
+      hole_bottom_left: 
+        what: mountinghole
+        where: 
+          ref: mirror_main_pinky_bottom
+          shift: [0,-14]
+      thumb_left: 
+        what: mountinghole
+        where: 
+          ref: mirror_thumb_middle_clusters
+          shift: [-13,-7]
+      hole_top_right: 
+        what: mountinghole
+        where: 
+          ref: mirror_main_inner_top
+          shift: [2,12]
+      hole_bottom_right: 
+        what: mountinghole
+        where: 
+          ref: mirror_main_inner_bottom
+          shift: [20,-5]
+      cattpucciano: 
+        what: text 
+        where: 
+          ref: mirror_main_inner_bottom
+          shift: [15.5,6.5]
+          rotate: -90 
+        params: 
+          text: Catpucciano
+          justify: left
+          h_size: 3.0
+          v_size: 3.0
+          thickness: .4
         
