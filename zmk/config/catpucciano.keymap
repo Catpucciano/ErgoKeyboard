@@ -21,9 +21,65 @@
     combos {
         compatible = "zmk,combos";
 
+        LetterQ {
+            bindings = <&kp Q>;
+            key-positions = <0 1>;
+        };
+
         Enter {
             bindings = <&kp ENTER>;
-            key-positions = <16 17 18>;
+            key-positions = <14 15 16>;
+        };
+
+        semicolon {
+            bindings = <&kp SEMI>;
+            key-positions = <6 7>;
+        };
+
+        Copy {
+            bindings = <&kp LC(C)>;
+            key-positions = <20 21>;
+        };
+
+        Paste {
+            bindings = <&kp LC(V)>;
+            key-positions = <21 22>;
+        };
+
+        Cut {
+            bindings = <&kp LC(X)>;
+            key-positions = <19 20>;
+        };
+
+        Undo {
+            bindings = <&kp LC(Z)>;
+            key-positions = <18 19>;
+        };
+    };
+
+    behaviors {
+        Number9: Number9 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "NUMBER9";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N9>, <&kp LEFT_PARENTHESIS>;
+        };
+
+        Number0: Number0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "NUMBER0";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N0>, <&kp RIGHT_PARENTHESIS>;
+        };
+
+        Copy: Copy {
+            compatible = "zmk,behavior-tap-dance";
+            label = "COPY";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp C>, <&kp LC(C)>;
         };
     };
 
@@ -49,10 +105,37 @@
             //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 
             bindings = <
-                              &kp W       &kp F        &kp P        &kp B        &kp J    &kp L        &kp U        &kp Y       
-                  &mt LGUI A  &mt LALT R  &mt LCTRL S  &mt LSHFT T  &kp G        &kp M    &mt RSHFT N  &mt RCTRL E  &mt RALT I  &mt RGUI O
-                  &kp Z       &kp X       &kp C        &kp D        &kp V        &kp K    &kp H        &kp COMMA    &kp DOT     &kp FSLH    
-                                          &kp DEL      &lt 1 TAB    &kp SPACE    &kp RET  &lt 2 ESC    &kp BSPC
+            &kp W       &kp F        &kp P        &kp B      &kp J    &kp L        &kp U        &kp Y
+&mt LGUI A  &mt LALT R  &mt LCTRL S  &mt LSHFT T  &kp G      &kp M    &mt RSHFT N  &mt RCTRL E  &mt RALT I  &mt RGUI O
+&kp Z       &kp X       &Copy        &kp D        &kp V      &kp K    &kp H        &kp COMMA    &kp DOT     &kp FSLH
+                        &kp DEL      &lt 1 TAB    &kp SPACE  &kp RET  &lt 2 ESC    &kp BSPC
+            >;
+        };
+
+        Symbol {
+            bindings = <
+              &kp EXCLAMATION  &kp AT_SIGN   &kp HASH      &kp DOLLAR  &kp PERCENT  &kp CARET         &kp AMPS           &kp ASTRK
+&kp NUMBER_1  &kp NUMBER_2     &kp NUMBER_3  &kp NUMBER_4  &kp N5      &kp MINUS    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp SEMI   &kp SINGLE_QUOTE
+&kp NUMBER_6  &kp N7           &kp N8        &Number9      &Number0    &kp EQUAL    &none             &none              &trans     &kp BSLH
+                               &trans        &trans        &trans      &trans       &sk LSHIFT        &trans
+            >;
+        };
+
+        VIM {
+            bindings = <
+        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 3  &trans  &trans    &trans    &trans  &bt BT_CLR
+&trans  &trans        &trans        &trans        &trans  &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT   &trans
+&trans  &trans        &trans        &trans        &trans  &trans    &trans    &trans  &trans      &trans
+                      &trans        &trans        &trans  &trans    &trans    &trans
+            >;
+        };
+
+        Function {
+            bindings = <
+        &kp F11  &kp F12      &kp F13  &kp F14  &kp F15  &kp F16  &kp F17  &kp F18
+&kp F1  &kp F2   &kp F3       &kp F4   &kp F5   &trans   &trans   &trans   &trans   &trans
+&kp F6  &kp F7   &kp F8       &kp F9   &kp F10  &trans   &trans   &trans   &trans   &trans
+                 &bootloader  &trans   &trans   &trans   &trans   &trans
             >;
         };
     };
