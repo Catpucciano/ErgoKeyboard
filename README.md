@@ -1,13 +1,20 @@
-# Catpucciano
-## Temporary README, Plan to create 3 versions of a split ergo keyboard layout that utilizes the Xiao nRF52840 and maybe the nice nano 
+<h1 align="center">Catpucciano</h1>
 
-## PCB
-[Insert Link]
+Catpucciano is 34 key key column-staggered choc split keyboard using a SEEED XIAO BLE and inspired by [TOTEM](https://github.com/GEIGEIGEIST/TOTEM/tree/main)
 
-## CASE
 
+***
+## Layout
+***
 ## BUILD GUIDE
+***
+## FILES
+### PCB
+### CASE
 
+***
 ## FIRMWARE
+***
+## Credits
 
-## CREDITS 
+### I Like the [TOTEM](https://github.com/GEIGEIGEIST/TOTEM/tree/main) by GEIST but not a fan of the splayed layout and wanted something more compact. Having the thumb cluster angled also makes it somewhat awkaward with it sticking out. I removed the upper corner keys to make the keyboard as small as possible to maximize desk space and portability. 
