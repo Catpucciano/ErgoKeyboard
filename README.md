@@ -2,9 +2,11 @@
 
 Catpucciano is 34 key key column-staggered choc split keyboard using a SEEED XIAO BLE and inspired by [TOTEM](https://github.com/GEIGEIGEIST/TOTEM/tree/main)
 
-
+![CATPUCCUIANO CASE](/docs/images/CATPUCCIANO_1.heic)\
+![CATPUCCUIANO CASE](/docs/images/CATPUCCIANO_2.jpg)\
 ***
 ## Layout
+![CATPUCCIANO LAYOUT](docs/images/CATPUCCIANO_layout.png)
 ***
 ## BUILD GUIDE
 ***
