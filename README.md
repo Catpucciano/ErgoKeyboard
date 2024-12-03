@@ -20,12 +20,13 @@ Catpucciano is 34 key key column-staggered choc split keyboard using a SEEED XIA
 ## FILES
 
 ### PCB
-
+Gerber Files [Here](/docs/PCB/)
+- Download the two zip files and upload them to your choice of manufacture. I used [JLCPCB](https://jlcpcb.com/)
 ### CASE
 Printed in two sections with FDM Printer <br>
 3mf for all three files [Case](<./docs/Case Files/Case.3mf>) <br>
 [Case](<./docs/Case Files/Case.stl>) <br>
-[Top](<./docs/Case/Top Case.stl>) <br>
+[Top](<./docs/Case Files/Top Case.stl>) <br>
 [Top with imbedded Magnets](<./docs/Case Files/Top Magnet.stl>) <br>
 [Tenting Case 45 Degrees](<./docs/Case Files/Tenting Case 45.stl>) <br>
 
