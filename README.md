@@ -22,6 +22,12 @@ Catpucciano is 34 key key column-staggered choc split keyboard using a SEEED XIA
 ### PCB
 
 ### CASE
+Printed in two sections with FDM Printer <br>
+3mf for all three files [Case](<./docs/Case Files/Case.3mf>) <br>
+[Case](<./docs/Case Files/Case.stl>) <br>
+[Top](<./docs/Case/Top Case.stl>) <br>
+[Top with imbedded Magnets](<./docs/Case Files/Top Magnet.stl>) <br>
+[Tenting Case 45 Degrees](<./docs/Case Files/Tenting Case 45.stl>) <br>
 
 ---
 
@@ -31,4 +37,4 @@ Catpucciano is 34 key key column-staggered choc split keyboard using a SEEED XIA
 
 ## Credits
 
-### I Like the [TOTEM](https://github.com/GEIGEIGEIST/TOTEM/tree/main) by GEIST but not a fan of the splayed layout and wanted something more compact. Having the thumb cluster angled also makes it somewhat awkaward with it sticking out. I removed the upper corner keys to make the keyboard as small as possible to maximize desk space and portability.
+### I like the [TOTEM](https://github.com/GEIGEIGEIST/TOTEM/tree/main) by GEIST but not a fan of the splayed layout and wanted something more compact. Having the thumb cluster angled also makes it somewhat awkaward with it sticking out. I removed the upper corner keys to make the keyboard as small as possible to maximize desk space and portability.
